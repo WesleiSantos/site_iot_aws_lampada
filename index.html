@@ -1,0 +1,63 @@
+<html>
+
+    <head>
+
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
+
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+    <!-- Resources for AWS IoT -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core-min.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/hmac-min.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/sha256-min.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+
+    <style>
+
+        body {padding: 0; margin: 0;}
+
+        #transportId {z-index: 99;position: absolute; top: 10px;left:10px;}
+
+        #mapContainer {width: 100vw; height: 100vh; display:none;}
+
+    </style>
+    <title>Lampada</title>
+</head>
+
+<body>
+        <div id="container">
+            <h1>Lampada</h1>
+            <div id="estado">Acesa/Apagada</div>
+        </div>
+</body>
+<script>
+    let condicaoDispositivo = false
+    $('#estado').css(vermelho)
+</script>
+
+<style>
+    .destaque {
+        background-color: green;
+        font-weight: bold;
+    }
+
+    #bt {
+        margin: 20px 0px 0px 0px
+    }
+    #estado {
+        background-color: red;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        margin-left: 30%;
+        margin-right: 30%;
+        border: 3px solid white;
+    }
+</style>
+
+</html>
