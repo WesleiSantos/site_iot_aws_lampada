@@ -21,5 +21,13 @@
         }
       ]
     }
+  },
+  "auth": {
+    "siteiotawslampada39f0938d": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
   }
 }
