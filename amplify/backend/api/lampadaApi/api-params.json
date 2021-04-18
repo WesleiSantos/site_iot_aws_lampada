@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/lampada",
+            "lambdaFunction": "lampadaLambda",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/lampada"
+        }
+    ],
+    "resourceName": "lampadaApi",
+    "apiName": "lampadaApi",
+    "functionArns": [
+        {
+            "lambdaFunction": "lampadaLambda"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-siteiotawslampada-dev-220459-authRole",
+        "unAuthRoleName": "amplify-siteiotawslampada-dev-220459-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "lampadaLambda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

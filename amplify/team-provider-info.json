@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-siteiotawslampada-dev-220459-authRole",
+      "UnauthRoleArn": "arn:aws:iam::140790021246:role/amplify-siteiotawslampada-dev-220459-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::140790021246:role/amplify-siteiotawslampada-dev-220459-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-siteiotawslampada-dev-220459-deployment",
+      "UnauthRoleName": "amplify-siteiotawslampada-dev-220459-unauthRole",
+      "StackName": "amplify-siteiotawslampada-dev-220459",
+      "StackId": "arn:aws:cloudformation:us-east-1:140790021246:stack/amplify-siteiotawslampada-dev-220459/1b78a9d0-9fe2-11eb-a7bf-0ef4281dfc4d",
+      "AmplifyAppId": "d1uw2mdpzs7mwc"
+    },
+    "categories": {
+      "function": {
+        "lampadaLambda": {
+          "deploymentBucketName": "amplify-siteiotawslampada-dev-220459-deployment",
+          "s3Key": "amplify-builds/lampadaLambda-64773954664779425a4c-build.zip"
+        }
+      }
+    }
+  }
+}
