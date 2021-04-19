@@ -3,16 +3,18 @@
   "version": "1.0.0",
   "description": "Amplify JavaScript site",
   "dependencies": {
-    "aws-amplify": "latest"
+    "aws-amplify": "latest",
+    "jquery": "^3.6.0"
   },
   "devDependencies": {
-    "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0",
     "copy-webpack-plugin": "^6.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "html-webpack-plugin": "^4.5.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "webpack && webpack-dev-server --mode development",
+    "start": "webpack && webpack-dev-server --watch --inline --hot --mode development",
     "build": "webpack"
   }
 }
