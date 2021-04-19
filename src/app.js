@@ -50,7 +50,10 @@ const subscribe = function(){PubSub.subscribe('myTopic',{ provider: 'AWSIoTProvi
   close: () => console.log('Done'),
 })}
 
+const publish = function (){
+  PubSub.publish('inTopic', { "status":'1' })
 
+}
 
 /*Auth.signUp({
   username,
@@ -98,5 +101,5 @@ Auth.currentCredentials().then((info) => {
 });
 
 export {
-  resendCode,confirmation,login, subscribe
+  resendCode,confirmation,login, subscribe, publish
 }
