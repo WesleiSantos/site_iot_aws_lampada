@@ -36,10 +36,20 @@
     </div>
 </body>
 <script>
+    $('#off').click(e => {
+        e.preventDefault()
+        console.log("of")
+        libary.publish("1");
+    });
     $('#subscribe').click(e => {
         e.preventDefault()
         console.log("subscribe")
         libary.subscribe();
+    });
+    $('#on').click(e => {
+        e.preventDefault()
+        console.log("on")
+        libary.publish("0")
     });
     $('#login').click(e => {
         e.preventDefault()

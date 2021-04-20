@@ -50,8 +50,9 @@ const subscribe = function(){PubSub.subscribe('myTopic',{ provider: 'AWSIoTProvi
   close: () => console.log('Done'),
 })}
 
-const publish = function (){
-  PubSub.publish('inTopic', { "status":'1' })
+const publish = function (comando){
+  console.log(comando)
+  PubSub.publish('inTopic', { "status":comando })
 
 }
 
