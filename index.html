@@ -21,7 +21,16 @@
             </form>
             <form class="login-form">
                 <button id="subscribe">subscribe</button>
-                <button id="publish">publish</button>
+
+                <br>
+                <br>
+
+                <button id="on">On</button>
+
+                <br>
+                <br>
+
+                <button id="off">Off</button>
             </form>
         </div>
     </div>
@@ -31,11 +40,6 @@
         e.preventDefault()
         console.log("subscribe")
         libary.subscribe();
-    });
-    $('#publish').click(e => {
-        e.preventDefault()
-        console.log("publish")
-        libary.publish();
     });
     $('#login').click(e => {
         e.preventDefault()
