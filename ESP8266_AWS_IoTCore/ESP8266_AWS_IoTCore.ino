@@ -1,14 +1,3 @@
-/*Developed by M V Subrahmanyam - https://www.linkedin.com/in/veera-subrahmanyam-mediboina-b63997145/
-  Project: Controlling LED from AWS
-  Electronics Innovation - www.electronicsinnovation.com
-  GitHub - https://github.com/VeeruSubbuAmi
-  YouTube - http://bit.ly/Electronics_Innovation
-  Upload date:  11 December 2019
-  AWS Iot Core
-  This example needs https://github.com/esp8266/arduino-esp8266fs-plugin
-  It connects to AWS IoT server then:
-  - subscribes to the topic "inTopic", and perfprm the action according to the data recieved from the AS
-*/
 #include "FS.h"
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
@@ -17,8 +6,8 @@
 
 // Update these with values suitable for your network.
 
-const char* ssid = "LEALNET_Teste";
-const char* password = "9966leal";
+const char* ssid = "***";
+const char* password = "***";
 
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org");
@@ -35,6 +24,7 @@ byte mac[6];
 char mac_Id[18];
 int dia=0;
 int tempo=0;
+int aux = 0;
 //============================================================================
 
 
@@ -46,6 +36,20 @@ void callback(char* topic, byte* payload, unsigned int length) {
     Serial.print((char)payload[i]); // Pring payload content
   }
   char led = (char)payload[11]; // Extracting the controlling command from the Payload to Controlling LED from AWS
+
+    if(digitalRead(D3) && aux == 0){
+    publish(1);
+    aux = 1;
+    digitalWrite(2, LOW);
+    Serial.println("Led ligou");
+  }
+
+  if(digitalRead(D3) && aux == 0){
+    publish(0);
+    aux = 0;
+    digitalWrite(2, HIGH);
+    Serial.println("Led apagou");
+    }
 
   Serial.print("led command=");
   Serial.println(led);
@@ -72,10 +76,7 @@ PubSubClient client(AWS_endpoint, 8883, callback, espClient); //set  MQTT port n
 void publish(int num) {
   String macIdStr = mac_Id;
   if (num == 0) {
-    
-      
-      snprintf (msg, BUFFER_LEN, "{\"mac_Id\" : \"%s\",\"status\" : \"%s\"}", macIdStr.c_str(), "false");
-    }
+    snprintf (msg, BUFFER_LEN, "{\"mac_Id\" : \"%s\",\"status\" : \"%s\"}", macIdStr.c_str(), "false");
   } else {
     snprintf (msg, BUFFER_LEN, "{\"mac_Id\" : \"%s\", \"status\" : \"%s\"}", macIdStr.c_str(), "true");
   }
