@@ -4,13 +4,19 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
+#define       LedBoard   2                             // WIFI Module LED
+#define       BUTTON     D3                            // NodeMCU Button
+
 // Update these with values suitable for your network.
 
-const char* ssid = "***";
-const char* password = "***";
+const char* ssid = "LEALNET_Teste";
+const char* password = "9966leal";
+
+const long utcOffsetInSeconds = -10800;
+char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "pool.ntp.org");
+NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 
 const char* AWS_endpoint = "a1u5p9d1s2ikgy-ats.iot.us-east-1.amazonaws.com"; //MQTT broker ip
 
@@ -22,9 +28,10 @@ char msg[BUFFER_LEN];
 int value = 0;
 byte mac[6];
 char mac_Id[18];
-int dia=0;
-int tempo=0;
-int aux = 0;
+int mesAux = 0;
+int diaAux = 0;
+int horasTotais = 0;
+int horasAux = -1;
 //============================================================================
 
 
@@ -36,32 +43,22 @@ void callback(char* topic, byte* payload, unsigned int length) {
     Serial.print((char)payload[i]); // Pring payload content
   }
   char led = (char)payload[11]; // Extracting the controlling command from the Payload to Controlling LED from AWS
-
-    if(digitalRead(D3) && aux == 0){
-    publish(1);
-    aux = 1;
-    digitalWrite(2, LOW);
-    Serial.println("Led ligou");
-  }
-
-  if(digitalRead(D3) && aux == 0){
-    publish(0);
-    aux = 0;
-    digitalWrite(2, HIGH);
-    Serial.println("Led apagou");
-    }
-
   Serial.print("led command=");
   Serial.println(led);
   if (led == 49) // 49 is the ASCI value of 1
   {
-    publish(1);
+    publish(1, 0, 0, 0);
     digitalWrite(2, LOW);
     Serial.println("Led ligou");
+
   }
   else if (led == 48) // 48 is the ASCI value of 0
   {
-    publish(0);
+    publish(0, mesAux, diaAux, horasTotais);
+    horasAux = -1;
+    horasTotais = 0;
+    diaAux = 0;
+    mesAux = 0;
     digitalWrite(2, HIGH);
     Serial.println("Led apagou");
   }
@@ -73,16 +70,15 @@ void callback(char* topic, byte* payload, unsigned int length) {
 WiFiClientSecure espClient;
 PubSubClient client(AWS_endpoint, 8883, callback, espClient); //set  MQTT port number to 8883 as per //standard
 
-void publish(int num) {
+void publish(int num, int mes, int dia, int quantidadeHoras) {
   String macIdStr = mac_Id;
   if (num == 0) {
-    snprintf (msg, BUFFER_LEN, "{\"mac_Id\" : \"%s\",\"status\" : \"%s\"}", macIdStr.c_str(), "false");
+    snprintf (msg, BUFFER_LEN, "{\"mac_Id\" : \"%s\",\"status\" : \"%s\", \"mes\" : %d, \"dia\" : %d, \"quantidadeHoras\" : %d }", macIdStr.c_str(), "false", mes, dia, quantidadeHoras);
   } else {
     snprintf (msg, BUFFER_LEN, "{\"mac_Id\" : \"%s\", \"status\" : \"%s\"}", macIdStr.c_str(), "true");
   }
   Serial.print("Publish message: ");
   Serial.println(msg);
-  //mqttClient.publish("outTopic", msg);
   client.publish("cmd/esp8266/house/lampada/res", msg);
   Serial.print("Heap: "); Serial.println(ESP.getFreeHeap()); //Low heap can cause problems
 }
@@ -221,9 +217,62 @@ void setup() {
 
 void loop() {
 
+  timeClient.update();
+
+  int horario = timeClient.getHours();
+  int minutos = timeClient.getMinutes();
+  int segundos = timeClient.getSeconds() + 1;
+  int tempoSegundos = (minutos * 60) + segundos;
+
+  int mesCorreto = (horario + 2) / 2;
+  int diaCorreto = (horario + 2) % 2 == 0 ? ceil(((float)tempoSegundos / 240)) : ceil(((float)tempoSegundos / 240) + 15);
+  int horarioCorreto = (tempoSegundos / 10) % 24;
+
+  Serial.printf("%d/%d : %dh \n ", diaCorreto, mesCorreto, horarioCorreto);
+
+  delay(1000);
+
   if (!client.connected()) {
     reconnect();
   }
-  
+
+  int lead2 = digitalRead(LedBoard);
+  if (lead2 == LOW) {
+    Serial.println("veio");
+    if (horasAux != horarioCorreto && horasAux != -1 ) {
+      horasTotais = horasTotais + 1;
+    }
+    if (diaAux != diaCorreto && diaAux != 0) {
+      Serial.printf("Mes = %d Dia = %d horas = %d \n ", mesAux, diaAux, horasTotais);
+      publish(0, mesAux, diaAux, horasTotais);
+      horasAux = -1;
+      horasTotais = 0;
+      diaAux = 0;
+      mesAux = 0;
+    }
+    diaAux = diaCorreto;
+    mesAux = mesCorreto;
+    horasAux = horarioCorreto;
+  }
+
+  if (digitalRead(BUTTON) == LOW) {
+    int lead = !digitalRead(LedBoard);
+    if (lead == LOW) {
+      publish(1, 0, 0, 0);
+      Serial.println("Led ligou");
+    }
+    if (lead == HIGH) {
+      Serial.printf("Mes = %d Dia = %d horas = %d \n ", mesAux, diaAux, horasTotais);
+      publish(0, mesAux, diaAux, horasTotais);
+      horasAux = -1;
+      horasTotais = 0;
+      diaAux = 0;
+      mesAux = 0;
+      Serial.println("Led apagou");
+    }
+    digitalWrite(LedBoard, lead);
+    delay(300);
+    Serial.println("Botão Pressionado");
+  }
   client.loop();
 }

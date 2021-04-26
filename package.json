@@ -4,6 +4,8 @@
   "description": "Amplify JavaScript site",
   "dependencies": {
     "aws-amplify": "latest",
+    "aws-sdk": "^2.892.0",
+    "cors": "^2.8.5",
     "jquery": "^3.6.0"
   },
   "devDependencies": {
