@@ -23,6 +23,14 @@
     "storagedynamob9a364d2Arn": {
       "Type": "String",
       "Default": "storagedynamob9a364d2Arn"
+    },
+    "storagedynamoRelatorioName": {
+      "Type": "String",
+      "Default": "storagedynamoRelatorioName"
+    },
+    "storagedynamoRelatorioArn": {
+      "Type": "String",
+      "Default": "storagedynamoRelatorioArn"
     }
   },
   "Conditions": {
@@ -83,6 +91,12 @@
             },
             "STORAGE_DYNAMOB9A364D2_ARN": {
               "Ref": "storagedynamob9a364d2Arn"
+            },
+            "STORAGE_DYNAMORELATORIO_NAME": {
+              "Ref": "storagedynamoRelatorioName"
+            },
+            "STORAGE_DYNAMORELATORIO_ARN": {
+              "Ref": "storagedynamoRelatorioArn"
             }
           }
         },
@@ -220,6 +234,39 @@
                     [
                       {
                         "Ref": "storagedynamob9a364d2Arn"
+                      },
+                      "index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
+              ],
+              "Resource": [
+                {
+                  "Ref": "storagedynamoRelatorioArn"
+                },
+                {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      {
+                        "Ref": "storagedynamoRelatorioArn"
                       },
                       "index/*"
                     ]

@@ -1,0 +1,7 @@
+{
+    "tableName": "Relatorio",
+    "partitionKeyName": "mes",
+    "partitionKeyType": "N",
+    "sortKeyName": "dia",
+    "sortKeyType": "N"
+}

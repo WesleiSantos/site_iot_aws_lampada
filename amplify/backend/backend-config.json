@@ -12,6 +12,14 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "storage",
+          "resourceName": "dynamoRelatorio",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
     }
@@ -42,6 +50,10 @@
   },
   "storage": {
     "dynamob9a364d2": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    },
+    "dynamoRelatorio": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
     }

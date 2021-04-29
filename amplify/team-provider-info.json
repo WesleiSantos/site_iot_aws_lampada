@@ -15,7 +15,7 @@
       "function": {
         "lampadaLambda": {
           "deploymentBucketName": "amplify-siteiotawslampada-dev-220459-deployment",
-          "s3Key": "amplify-builds/lampadaLambda-5257654743767730487a-build.zip"
+          "s3Key": "amplify-builds/lampadaLambda-506f487875437978794d-build.zip"
         }
       },
       "auth": {
