@@ -31,5 +31,10 @@
       "customAuth": false
     }
   },
-  "storage": {}
+  "storage": {
+    "dynamob9a364d2": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
+  }
 }
