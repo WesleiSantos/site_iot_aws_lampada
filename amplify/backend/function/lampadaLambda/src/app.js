@@ -16,10 +16,15 @@ var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware'
 var bodyParser = require('body-parser')
 var express = require('express')
 var app = express()
-var cors = require('cors') // ADDED - for avoiding CORS in local dev
-app.use(cors())  // ADDED - for avoiding CORS in local dev
+/*var cors = require('cors') // ADDED - for avoiding CORS in local dev
+app.use(cors())  // ADDED - for avoiding CORS in local dev*/
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
+app.use(function (request, response, next) {
+  response.header("Access-Control-Allow-Origin", "*")
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+});
 
 let tableName = "Lampada";
 if (process.env.ENV && process.env.ENV !== "NONE") {
