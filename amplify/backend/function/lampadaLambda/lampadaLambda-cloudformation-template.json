@@ -15,22 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "storageLampadatableName": {
-      "Type": "String",
-      "Default": "storageLampadatableName"
-    },
-    "storageLampadatableArn": {
-      "Type": "String",
-      "Default": "storageLampadatableArn"
-    },
-    "storageRelatoriotableName": {
-      "Type": "String",
-      "Default": "storageRelatoriotableName"
-    },
-    "storageRelatoriotableArn": {
-      "Type": "String",
-      "Default": "storageRelatoriotableArn"
     }
   },
   "Conditions": {
@@ -85,18 +69,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "STORAGE_LAMPADATABLE_NAME": {
-              "Ref": "storageLampadatableName"
-            },
-            "STORAGE_LAMPADATABLE_ARN": {
-              "Ref": "storageLampadatableArn"
-            },
-            "STORAGE_RELATORIOTABLE_NAME": {
-              "Ref": "storageRelatoriotableName"
-            },
-            "STORAGE_RELATORIOTABLE_ARN": {
-              "Ref": "storageRelatoriotableArn"
             }
           }
         },
@@ -188,91 +160,6 @@
                   }
                 ]
               }
-            }
-          ]
-        }
-      }
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:Update*",
-                "dynamodb:RestoreTable*",
-                "dynamodb:Delete*"
-              ],
-              "Resource": [
-                {
-                  "Ref": "storageLampadatableArn"
-                },
-                {
-                  "Fn::Join": [
-                    "/",
-                    [
-                      {
-                        "Ref": "storageLampadatableArn"
-                      },
-                      "index/*"
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:Update*",
-                "dynamodb:RestoreTable*",
-                "dynamodb:Delete*"
-              ],
-              "Resource": [
-                {
-                  "Ref": "storageRelatoriotableArn"
-                },
-                {
-                  "Fn::Join": [
-                    "/",
-                    [
-                      {
-                        "Ref": "storageRelatoriotableArn"
-                      },
-                      "index/*"
-                    ]
-                  ]
-                }
-              ]
             }
           ]
         }

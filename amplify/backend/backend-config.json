@@ -4,24 +4,7 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "storage",
-          "resourceName": "Lampadatable",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        },
-        {
-          "category": "storage",
-          "resourceName": "Relatoriotable",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
+      "dependsOn": []
     }
   },
   "api": {
@@ -48,18 +31,5 @@
       "customAuth": false
     }
   },
-  "storage": {
-    "Lampadatable": {
-      "service": "DynamoDB",
-      "serviceType": "imported",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
-    },
-    "Relatoriotable": {
-      "service": "DynamoDB",
-      "serviceType": "imported",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
-    }
-  }
+  "storage": {}
 }
