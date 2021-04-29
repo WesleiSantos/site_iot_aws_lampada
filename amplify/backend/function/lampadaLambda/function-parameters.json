@@ -1,4 +1,19 @@
 {
   "lambdaLayers": [],
-  "permissions": {}
+  "permissions": {
+    "storage": {
+      "Lampadatable": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Relatoriotable": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
 }

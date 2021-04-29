@@ -32,6 +32,8 @@ int mesAux = 0;
 int diaAux = 0;
 int horasTotais = 0;
 int horasAux = -1;
+int diaTemporizador = 0;
+int periodoTemporizador = 0;
 //============================================================================
 
 

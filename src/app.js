@@ -60,7 +60,7 @@ const publish = function (comando) {
 }
 const statusLampada = function () {
   API.get('lampadaApi', '/lampada', {}).then(result => {
-    console.log(JSON.parse(result.body));
+    console.log({result});
   }).catch(err => {
     console.log(err);
   })

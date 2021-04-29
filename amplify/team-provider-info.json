@@ -30,6 +30,15 @@
           "partitionKeyType": "S",
           "sortKeyName": "ts",
           "sortKeyType": "N"
+        },
+        "Relatoriotable": {
+          "tableName": "Relatorio_table",
+          "region": "us-east-1",
+          "arn": "arn:aws:dynamodb:us-east-1:140790021246:table/Relatorio_table",
+          "partitionKeyName": "mes",
+          "partitionKeyType": "N",
+          "sortKeyName": "dia",
+          "sortKeyType": "N"
         }
       }
     }
