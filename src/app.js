@@ -58,13 +58,13 @@ const publish = function (comando) {
   PubSub.publish('inTopic', { "status": comando })
 
 }
-/*const statusLampada = function () {
+const statusLampada = function () {
   API.get('lampadaApi', '/lampada', {}).then(result => {
     console.log({result});
   }).catch(err => {
     console.log(err);
   })
-}*/
+}
 
 /*API.get('lampadaApi', `/lampada/${id}`, {}).then((result) => {
   this.lampada = JSON.parse(result.body);
@@ -118,5 +118,5 @@ Auth.currentCredentials().then((info) => {
 });
 
 export {
-  resendCode, confirmation, login, subscribe, publish
+  resendCode, confirmation, login, subscribe, publish,statusLampada
 }

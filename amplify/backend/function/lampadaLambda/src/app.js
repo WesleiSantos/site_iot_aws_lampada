@@ -11,7 +11,7 @@ or in the "license" file accompanying this file. This file is distributed on an 
 See the License for the specific language governing permissions and limitations under the License.
 */
 
-/*// from REST API + DynamoDB template
+// from REST API + DynamoDB template
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 var bodyParser = require('body-parser')
 var express = require('express')
@@ -19,16 +19,16 @@ var app = express()
 var cors = require('cors') // ADDED - for avoiding CORS in local dev
 app.use(cors())  // ADDED - for avoiding CORS in local dev
 app.use(bodyParser.json())
-app.use(awsServerlessExpressMiddleware.eventContext())*/
+app.use(awsServerlessExpressMiddleware.eventContext())
 
-/*let tableName = "Lampada_table";*/
-/*if (process.env.ENV && process.env.ENV !== "NONE") {
+let tableName = "Lampada";
+if (process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
-}*/
+}
 
 /* 1. Import the AWS SDK and create an instance of the DynamoDB Document Client */
-/*const AWS = require('aws-sdk')
-const docClient = new AWS.DynamoDB.DocumentClient();*/
+const AWS = require('aws-sdk')
+const docClient = new AWS.DynamoDB.DocumentClient();
 
 
 
@@ -49,7 +49,7 @@ const docClient = new AWS.DynamoDB.DocumentClient();*/
 app.get('/lampada/*', function(req, res) {
   // Add your code here
   res.json({success: 'get call succeed!', url: req.url});
-});
+});*/
 app.get('/lampada', function(req, res) {
   var params = {
     TableName: tableName // TODO: UPDATE THIS WITH THE ACTUAL NAME OF THE FORM TABLE ENV VAR (set by Amplify CLI)
@@ -59,7 +59,7 @@ app.get('/lampada', function(req, res) {
     else res.json({ data })
   })
 });
-
+/*
 app.get("/lampada/:id", function (request, response) {
   let params = {
     TableName: tableName,

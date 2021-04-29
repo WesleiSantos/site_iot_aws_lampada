@@ -61,6 +61,11 @@
         let password= $('#password').val()
         libary.login(user,password);
     })
+    $('#status').click(e => {
+        e.preventDefault()
+        console.log("status")
+        libary.statusLampada();
+    })
 </script>
 
 <style>
