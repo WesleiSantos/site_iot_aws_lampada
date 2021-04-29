@@ -31,12 +31,5 @@
       "customAuth": false
     }
   },
-  "storage": {
-    "Lampadatable": {
-      "service": "DynamoDB",
-      "serviceType": "imported",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
-    }
-  }
+  "storage": {}
 }

@@ -20,15 +20,6 @@
       },
       "auth": {
         "siteiotawslampada39f0938d": {}
-      },
-      "storage": {
-        "Lampadatable": {
-          "tableName": "Lampada_table",
-          "region": "us-east-1",
-          "arn": "arn:aws:dynamodb:us-east-1:140790021246:table/Lampada_table",
-          "partitionKeyName": "id",
-          "partitionKeyType": "N"
-        }
       }
     }
   }
