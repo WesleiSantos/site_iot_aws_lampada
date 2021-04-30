@@ -4,7 +4,6 @@
     <meta name="viewport"
         content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-    <link rel="stylesheet" href="assets/css/style.css">
     <script src="main.bundle.js">
         
     </script>
@@ -13,12 +12,12 @@
 
 <body>
     <div class="top-box">
-        <div class="img-box1"><img src="assets/images/Lamp1.jpg" alt="Lamp1"></div>
+        <div class="img-box1" id="img-box1"></div>
         <div class="title-box">Automação Residencial</div>
     </div>
     <div class="main-box">
         <div class="text-box">Dispositivo: Lâmpada</div>
-        <div class="img-box2"><img src="assets/images/Lamp2.jpg" alt="Lamp2" width="320" height="320"></div>
+        <div class="img-box2"></div>
         <div class="button-div">
             <button id="off" class="btn-off">Off</button>
             <button id="on" class="btn-on">On</button>
@@ -26,13 +25,14 @@
         
         <div class="div-box1">
             <div class="box-title">Temporizador</div>
-            <div class="logo"><img src="assets/images/Clock.png" alt="Clock" width="50" height="45"></div>
+            <div class="logo"></div>
             <div class="line"></div>
         </div>
         <div class="div-box2">
             <div class="box-title">Histórico de consumo</div>
-            <div class="logo"><img src="assets/images/Grafico.png" alt="Grafico" width="70" height="50"></div>
+            <div class="logo"></div>
             <div class="line"></div>
+            <button id="status">Test</button>
         </div>
     </div>
     <br>
@@ -40,6 +40,10 @@
     <br>
 </body>
 <script>
+    $(".img-box1").append(`<img src= ${libary.lamp1} alt="Lamp1">`);
+    $(".img-box2").append(`<img src=${libary.lamp2} alt="Lamp2" width="320" height="320">`);
+    $(".div-box1 .logo").append(`<img src=${libary.clock} alt="Clock" width="50" height="45">`);
+    $(".div-box2 .logo").append(`<img src=${libary.grafico} alt="Grafico" width="70" height="50">`);
     $('#off').click(e => {
         e.preventDefault()
         console.log("of")

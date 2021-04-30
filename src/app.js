@@ -3,6 +3,11 @@ import { API } from 'aws-amplify';
 import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
 import { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
+import './assets/css/style.css'
+import lamp1 from './assets/images/Lamp1.jpg'
+import lamp2 from './assets/images/Lamp2.jpg'
+import clock from './assets/images/Clock.png'
+import grafico from './assets/images/Grafico.png'
 Amplify.configure(awsconfig);
 
 import $ from 'jquery';
@@ -66,6 +71,14 @@ const statusLampada = function () {
   })
 }
 
+const consutRelatorio = function(){
+  API.get('lampadaApi', '/lampada/relatorio/mes', {}).then(result => {
+    console.log({result});
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
 /*API.get('lampadaApi', `/lampada/${id}`, {}).then((result) => {
   this.lampada = JSON.parse(result.body);
 }).catch(err => {
@@ -118,5 +131,5 @@ Auth.currentCredentials().then((info) => {
 });
 
 export {
-  resendCode, confirmation, login, subscribe, publish,statusLampada
+  resendCode, confirmation, login, subscribe, publish,statusLampada,consutRelatorio,lamp1,lamp2, clock, grafico
 }

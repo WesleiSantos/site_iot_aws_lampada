@@ -28,9 +28,11 @@ app.use(function (request, response, next) {
   next()
 });
 
-let tableName = "Lampada";
+let tablelampada = "Lampada";
+let tableRelatorio = "Relatorio"
 if (process.env.ENV && process.env.ENV !== "NONE") {
-  tableName = tableName + '-' + process.env.ENV;
+  tablelampada = tablelampada + '-' + process.env.ENV;
+  tableRelatorio = tableRelatorio + '-' + process.env.ENV;
 }
 
 /* 1. Import the AWS SDK and create an instance of the DynamoDB Document Client */
@@ -59,7 +61,17 @@ app.get('/lampada/*', function(req, res) {
 });*/
 app.get('/lampada', function(req, res) {
   var params = {
-    TableName: tableName // TODO: UPDATE THIS WITH THE ACTUAL NAME OF THE FORM TABLE ENV VAR (set by Amplify CLI)
+    TableName: tablelampada // TODO: UPDATE THIS WITH THE ACTUAL NAME OF THE FORM TABLE ENV VAR (set by Amplify CLI)
+  }
+  docClient.scan(params, function(err, data) {
+    if (err) res.json({ err })
+    else res.json({ data })
+  })
+});
+
+app.get('/lampada/relatorio/mes', function(req, res) {
+  var params = {
+    TableName: tableRelatorio // TODO: UPDATE THIS WITH THE ACTUAL NAME OF THE FORM TABLE ENV VAR (set by Amplify CLI)
   }
   docClient.scan(params, function(err, data) {
     if (err) res.json({ err })
