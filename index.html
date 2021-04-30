@@ -61,11 +61,11 @@
         let user=$('#userName').val()
         let password= $('#password').val()
         libary.login(user,password);
-    });
+    })
     $('#status').click(e => {
         e.preventDefault()
-        console.log("on")
-        libary.statusLampada()
-    });
+        console.log("status")
+        libary.statusLampada();
+    })
 </script>
 </html>

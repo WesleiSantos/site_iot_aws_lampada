@@ -1,6 +1,10 @@
 /* Amplify Params - DO NOT EDIT
 	ENV
 	REGION
+	STORAGE_DYNAMOB9A364D2_ARN
+	STORAGE_DYNAMOB9A364D2_NAME
+	STORAGE_DYNAMORELATORIO_ARN
+	STORAGE_DYNAMORELATORIO_NAME
 Amplify Params - DO NOT EDIT *//*
 Copyright 2017 - 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
@@ -14,15 +18,20 @@ var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware'
 var bodyParser = require('body-parser')
 var express = require('express')
 var app = express()
-var cors = require('cors') // ADDED - for avoiding CORS in local dev
-app.use(cors())  // ADDED - for avoiding CORS in local dev
+/*var cors = require('cors') // ADDED - for avoiding CORS in local dev
+app.use(cors())  // ADDED - for avoiding CORS in local dev*/
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
+app.use(function (request, response, next) {
+  response.header("Access-Control-Allow-Origin", "*")
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+});
 
-let tableName = "Lampada_table";
-/*if (process.env.ENV && process.env.ENV !== "NONE") {
+let tableName = "Lampada";
+if (process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
-}*/
+}
 
 /* 1. Import the AWS SDK and create an instance of the DynamoDB Document Client */
 const AWS = require('aws-sdk')
@@ -31,9 +40,9 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 
 /* 2. create a function that will generate a unique ID for each entry in the database */
-function id () {
+/*function id () {
   return Math.random().toString(36).substring(2) + Date.now().toString(36);
-}
+}*/
 
 /**********************
  * Example get method *
@@ -57,7 +66,7 @@ app.get('/lampada', function(req, res) {
     else res.json({ data })
   })
 });
-
+/*
 app.get("/lampada/:id", function (request, response) {
   let params = {
     TableName: tableName,
@@ -75,7 +84,7 @@ app.get("/lampada/:id", function (request, response) {
 });
 
 
-
+*/
 
 /****************************
 * Example post method *

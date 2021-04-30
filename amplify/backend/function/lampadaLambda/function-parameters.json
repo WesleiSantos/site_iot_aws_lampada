@@ -1,4 +1,19 @@
 {
   "lambdaLayers": [],
-  "permissions": {}
+  "permissions": {
+    "storage": {
+      "dynamob9a364d2": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "dynamoRelatorio": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
 }

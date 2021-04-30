@@ -4,7 +4,24 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "dependsOn": []
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "dynamob9a364d2",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "storage",
+          "resourceName": "dynamoRelatorio",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "api": {
@@ -32,11 +49,13 @@
     }
   },
   "storage": {
-    "Lampadatable": {
+    "dynamob9a364d2": {
       "service": "DynamoDB",
-      "serviceType": "imported",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
+      "providerPlugin": "awscloudformation"
+    },
+    "dynamoRelatorio": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

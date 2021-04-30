@@ -60,7 +60,7 @@ const publish = function (comando) {
 }
 const statusLampada = function () {
   API.get('lampadaApi', '/lampada', {}).then(result => {
-    console.log(JSON.parse(result.body));
+    console.log({result});
   }).catch(err => {
     console.log(err);
   })
@@ -118,5 +118,5 @@ Auth.currentCredentials().then((info) => {
 });
 
 export {
-  resendCode, confirmation, login, subscribe, publish, statusLampada
+  resendCode, confirmation, login, subscribe, publish,statusLampada
 }

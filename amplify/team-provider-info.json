@@ -15,22 +15,11 @@
       "function": {
         "lampadaLambda": {
           "deploymentBucketName": "amplify-siteiotawslampada-dev-220459-deployment",
-          "s3Key": "amplify-builds/lampadaLambda-545632446d577a2b6732-build.zip"
+          "s3Key": "amplify-builds/lampadaLambda-506f487875437978794d-build.zip"
         }
       },
       "auth": {
         "siteiotawslampada39f0938d": {}
-      },
-      "storage": {
-        "Lampadatable": {
-          "tableName": "Lampada_table",
-          "region": "us-east-1",
-          "arn": "arn:aws:dynamodb:us-east-1:140790021246:table/Lampada_table",
-          "partitionKeyName": "mac_Id",
-          "partitionKeyType": "S",
-          "sortKeyName": "ts",
-          "sortKeyType": "N"
-        }
       }
     }
   }
