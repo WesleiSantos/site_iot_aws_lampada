@@ -299,7 +299,7 @@
         position: absolute;
         border: 1px solid #000000;
         top: 30%;
-        left: 10%;
+        left: 30%;
         width: 30%;
         height: 10%;
     }
@@ -308,11 +308,20 @@
         position: absolute;
         border: 1px solid #000000;
         top: 30%;
-        right: 10%;
+        right: 5%;
         width: 30%;
         height: 10%;
     }
 
+    .day-select{
+        position: absolute;
+        border: 1px solid #000000;
+        top: 30%;
+        left: 5%;
+        width: 20%;
+        height: 10%;
+    }
+    
     .box-btn{
         position: absolute;
         width: 20%;
