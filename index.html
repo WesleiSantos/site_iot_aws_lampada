@@ -13,21 +13,33 @@
 
 <body>
 
-    <div class="w3-sidebar w3-bar-block" style="width:25%">
-        <a href="#" class="w3-bar-item w3-button">Link 1</a>
-            <a href="#" class="w3-bar-item w3-button">Link 2</a>
-            <a href="#" class="w3-bar-item w3-button">Link 3</a>
+    <input type="checkbox" id="check" class="check">
+    <label class="icon" id="icon" for="check"><img src="assets/images/Menu.png" alt="menu" width="5%" height="10%"></label>
+
+    <div class="bar">
+        <nav>
+            <div class="login-page">
+                <div class="form">
+                    <form class="login-form">
+                        <input type="text" id="userName" placeholder="username" />
+                        <input type="password" id="password" placeholder="password" />
+                        <button id="login">login</button>
+                        <p class="message">Not registered? <a href="#">Create an account</a></p>
+                    </form>
+                </div>
+            </div>
+        </nav>
     </div>
 
     <div class="top-box">
-        <div class="img-box1"><img src="assets/images/Lamp1.jpg" alt="Lamp1"></div>
+        <div class="img-box1"><img src="assets/images/Lamp1.jpg" alt="Lamp1" width="100%" height="100%"></div>
         <div class="title-box">Automação Residencial</div>
     </div>
     <div class="main-box">
         <div class="text-box">Dispositivo: Lâmpada</div>
         <div class="box-tarifa"><input class="input-box" type="text"></div>
         <button type="submit" class="submit-btn">Enviar tarifa</button>
-        <div class="img-box2"><img src="assets/images/Lamp2.png" alt="Lamp2" width="320" height="320"></div>
+        <div class="img-box2"><img src="assets/images/Lamp2.png" alt="Lamp2" width="50%" height="60%"></div>
         <div class="button-div">
             <button id="off" class="btn-off">Off</button>
             <button id="on" class="btn-on">On</button>
@@ -35,7 +47,7 @@
         
         <div class="div-box1">
             <div class="box-title">Temporizador</div>
-            <div class="logo"><img src="assets/images/Clock.png" alt="Clock" width="80" height="45"></div>
+            <div class="logo"><img src="assets/images/Clock.png" alt="Clock" width="70%" height="80%"></div>
             <div class="line"></div>
             <div class="start-time">
                 <select class="selection-box">
@@ -111,7 +123,7 @@
                 <option value="11">Novembro</option>
                 <option value="12">Dezembro</option>
               </select>
-            <div class="logo"><img src="assets/images/Gráfico.png" alt="Grafico" width="70" height="50"></div>
+            <div class="logo"><img src="assets/images/Gráfico.png" alt="Grafico" width="70%" height="80%"></div>
             <button type="submit" class="box-btn">Histórico</button>
             <div class="line"></div>
         </div>
