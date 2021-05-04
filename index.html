@@ -4,17 +4,19 @@
     <meta name="viewport"
         content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="main.bundle.js">
-        
+    <script src="main.bundle.js"></script>
+
     </script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <title>Lampada</title>
 </head>
 
 <body>
 
     <input type="checkbox" id="check" class="check">
-    <label class="icon" id="icon" for="check"><img src="assets/images/Menu.png" alt="menu" width="5%" height="10%"></label>
+    <label class="icon" id="icon" for="check"></label>
 
     <div class="bar">
         <nav>
@@ -24,33 +26,37 @@
                         <input type="text" id="userName" placeholder="username" />
                         <input type="password" id="password" placeholder="password" />
                         <button id="login">login</button>
-                        <p class="message">Not registered? <a href="#">Create an account</a></p>
                     </form>
                 </div>
             </div>
         </nav>
     </div>
 
-    <div class="top-box">
-        <div class="img-box1"><img src="assets/images/Lamp1.jpg" alt="Lamp1" width="100%" height="100%"></div>
-        <div class="title-box">Automação Residencial</div>
+    <div class="top-box d-flex justify-content-center">
+        <div class="d-flex align-items-center pl-5 img-box1"><h1 class="text-center ml-5 pl-5">Automação <br/> Residencial</h1> </div></div>
     </div>
     <div class="main-box">
-        <div class="text-box">Dispositivo: Lâmpada</div>
-        <div class="box-tarifa"><input class="input-box" type="text"></div>
-        <button type="submit" class="submit-btn">Enviar tarifa</button>
-        <div class="img-box2"><img src="assets/images/Lamp2.png" alt="Lamp2" width="50%" height="60%"></div>
+        <div class="text-box ml-3 mb-3"><h3>Dispositivo: Lâmpada</h3></div>
+        <form class="form-inline mt-3">
+            <div class="form-group ml-3 mb-2 mr-2">
+                <input class="form-control" type="text" id="tarifa">
+            </div>
+            <button type="submit" id="submit_tarifa" class="btn btn-secondary mb-2">Enviar tarifa</button>
+        </form>
+        <div class="img-box2"></div>
+        <label id="status_lampada"></label>
         <div class="button-div">
-            <button id="off" class="btn-off">Off</button>
-            <button id="on" class="btn-on">On</button>
+            <button id="off" class="btn-off btn btn-success">Off</button>
+            <button id="on" class="btn-on btn btn-danger">On</button>
         </div>
-        
+
         <div class="div-box1">
             <div class="box-title">Temporizador</div>
-            <div class="logo"><img src="assets/images/Clock.png" alt="Clock" width="70%" height="80%"></div>
+            <div class="logo"></div>
             <div class="line"></div>
             <div class="day-select">
-                <select class="selection-box">
+                <select class="selection-box form-control" id="dia_inicio">
+                    <option selected>Dia</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -81,39 +87,40 @@
                     <option value="28">28</option>
                     <option value="29">29</option>
                     <option value="30">30</option>
-
-                  </select>
+                </select>
             </div>
-            <div class="start-time">
-                <select class="selection-box">
-                    <option value="1">00:00</option>
-                    <option value="2">01:00</option>
-                    <option value="3">02:00</option>
-                    <option value="4">03:00</option>
-                    <option value="5">04:00</option>
-                    <option value="6">05:00</option>
-                    <option value="7">06:00</option>
-                    <option value="8">07:00</option>
-                    <option value="9">08:00</option>
-                    <option value="10">09:00</option>
-                    <option value="11">10:00</option>
-                    <option value="12">11:00</option>
-                    <option value="13">12:00</option>
-                    <option value="14">13:00</option>
-                    <option value="15">14:00</option>
-                    <option value="16">15:00</option>
-                    <option value="17">16:00</option>
-                    <option value="18">17:00</option>
-                    <option value="19">18:00</option>
-                    <option value="20">19:00</option>
-                    <option value="21">20:00</option>
-                    <option value="22">21:00</option>
-                    <option value="23">22:00</option>
-                    <option value="24">23:00</option>
-                  </select>
+            <div class="start-time form">
+                <select class="selection-box form-control" id="hora_inicio">
+                    <option selected>Hora</option>
+                    <option value="0">00:00</option>
+                    <option value="1">01:00</option>
+                    <option value="2">02:00</option>
+                    <option value="3">03:00</option>
+                    <option value="4">04:00</option>
+                    <option value="5">05:00</option>
+                    <option value="6">06:00</option>
+                    <option value="7">07:00</option>
+                    <option value="8">08:00</option>
+                    <option value="9">09:00</option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="15">15:00</option>
+                    <option value="16">16:00</option>
+                    <option value="17">17:00</option>
+                    <option value="18">18:00</option>
+                    <option value="19">19:00</option>
+                    <option value="20">20:00</option>
+                    <option value="21">21:00</option>
+                    <option value="22">22:00</option>
+                    <option value="23">23:00</option>
+                </select>
             </div>
             <div class="time-on">
-                <select class="selection-box">
+                <select class="selection-box form-control" id="quantidade_tempo">
+                    <option selected>Tempo</option>
                     <option value="1">01:00</option>
                     <option value="2">02:00</option>
                     <option value="3">03:00</option>
@@ -138,37 +145,61 @@
                     <option value="22">22:00</option>
                     <option value="23">23:00</option>
                     <option value="24">24:00</option>
-                  </select>
+                </select>
             </div>
-            <button type="submit" class="box-btn">Programar timer</button>
+            <button type="submit" class="box-btn btn btn-secondary" id="program_time">Ativar</button>
         </div>
         <div class="div-box2">
             <div class="box-title">Histórico de consumo</div>
-            <select class="month-box">
-                <option value="1">Janeiro</option>
-                <option value="2">Fevereiro</option>
-                <option value="3">Março</option>
-                <option value="4">Abril</option>
-                <option value="5">Maio</option>
-                <option value="6">Junho</option>
-                <option value="7">Julho</option>
-                <option value="8">Agosto</option>
-                <option value="9">Setembro</option>
-                <option value="10">Outubro</option>
-                <option value="11">Novembro</option>
-                <option value="12">Dezembro</option>
-              </select>
-            <div class="logo"><img src="assets/images/Gráfico.png" alt="Grafico" width="70%" height="80%"></div>
-            <button type="submit" class="box-btn">Histórico</button>
+            <div class="month-box">
+                <select class="form-control" id="historico_consumo">
+                    <option selected>Mês</option>
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+            <div class="logo"></div>
+            <button type="submit" class="box-btn btn btn-secondary" id="historico_submit">Buscar</button>
             <div class="line"></div>
+            <div class="relatorio table-overflow">
+                <table class="table table-hover" id="table_relatorio">
+                    <thead>
+                      <tr>
+                        <th scope="col">Mês</th>
+                        <th scope="col">Dia</th>
+                        <th scope="col">Valor Tarifa</th>
+                        <th scope="col">Tempo Total</th>
+                        <th scope="col">Potência Total</th>
+                        <th scope="col">Custo Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+            </div>
         </div>
     </div>
 </body>
 <script>
+    $(".img-box1").css({"background-image": `url(${libary.lamp1})`,"background-position":"10% 60%","background-size":"100% 70%","background-repeat":"no-repeat"})
+    $(".img-box2").append(`<img src=${libary.lamp2} alt="Lamp2" alt="Lamp2" width="50%" height="60%">`)
+    $(".div-box1 .logo").append(`<img src=${libary.clock} alt="Clock" width="70%" height="80%">`)
+    $(".div-box2 .logo").append(`<img src=${libary.grafico} alt="Grafico" width="70%" height="80%">`)
+    $("#icon").append(`<img src=${libary.menu} alt="menu" width="40px" height="40px">`)
     $('#off').click(e => {
         e.preventDefault()
         console.log("of")
-        libary.publish("1");
+        libary.publish_lampada_status("1");
     });
     $('#subscribe').click(e => {
         e.preventDefault()
@@ -178,19 +209,37 @@
     $('#on').click(e => {
         e.preventDefault()
         console.log("on")
-        libary.publish("0")
+        libary.publish_lampada_status("0")
     });
     $('#login').click(e => {
         e.preventDefault()
         console.log("login")
-        let user=$('#userName').val()
-        let password= $('#password').val()
-        libary.login(user,password);
+        let user = $('#userName').val()
+        let password = $('#password').val()
+        libary.login(user, password);
     })
     $('#status').click(e => {
         e.preventDefault()
         console.log("status")
-        libary.statusLampada();
+        //libary.statusLampada();
+    })
+    $('#program_time').click(e => {
+        e.preventDefault()
+        let dia = $("#dia_inicio").val()
+        let hora_inicio = $("#hora_inicio").val()
+        let quantidade_tempo = $("#quantidade_tempo").val()
+        libary.publish_temporizador(dia, hora_inicio, quantidade_tempo)
+    })
+    $('#submit_tarifa').click(e => {
+        e.preventDefault()
+        let tarifa = $('#tarifa').val()
+        libary.publish_tarifa(tarifa)
+    })
+    $('#historico_submit').click(e => {
+        e.preventDefault()
+        let mes = $('#historico_consumo').val()
+        libary.consutRelatorio(mes)
     })
 </script>
+
 </html>

@@ -8,6 +8,7 @@ import lamp1 from './assets/images/Lamp1.jpg'
 import lamp2 from './assets/images/Lamp2.jpg'
 import clock from './assets/images/Clock.png'
 import grafico from './assets/images/Grafico.png'
+import menu from './assets/images/Menu.png'
 Amplify.configure(awsconfig);
 
 import $ from 'jquery';
@@ -58,26 +59,62 @@ const subscribe = function () {
   })
 }
 
-const publish = function (comando) {
+const publish_lampada_status = function (comando) {
   console.log(comando)
-  PubSub.publish('inTopic', { "status": comando })
-
+  //PubSub.publish('cmd/esp8266/house/lampada/atualizar_status', { "status": comando }) 
+  PubSub.publish('cmd/esp8266/house/lampada/req', { "status": comando })
 }
-const statusLampada = function () {
+
+const publish_tarifa = function (valor_tarifa) {
+  console.log(valor_tarifa)
+  PubSub.publish('cmd/esp8266/house/lampada/atualizar_tarifa', { "tarifa": valor_tarifa })
+}
+
+const publish_temporizador = function (status, dia, hora_inicio, quantidade_tempo) {
+  console.log(status, dia, hora_inicio, quantidade_tempo)
+  PubSub.publish('cmd/esp8266/house/lampada/atualizar_temporizador', { "status": status, "dia": dia, "hora_inicio": hora_inicio, "quantidade_tempo": quantidade_tempo })
+}
+
+let delay=5000; //5 seconds
+setInterval(function(){
   API.get('lampadaApi', '/lampada', {}).then(result => {
-    console.log({result});
+    let status_lampada = JSON.parse(`{"status":${result.data.Items[0].status}}`)
+    console.log(status_lampada)
+    if (status_lampada.status == 0) {
+      $("#status_lampada").html("ligada")
+    } else {
+      $("#status_lampada").html("desligada")
+    }
+  }).catch(err => {
+    console.log(err);
+  })
+},delay);
+
+
+
+const consutRelatorio = function (mes) {
+  API.get('lampadaApi', `/lampada/relatorio/mes/${mes}`, {}).then((result) => {
+    $("#table_relatorio>tbody").html('')
+    result.data.forEach(myFunction)
+    function myFunction(item, index) {
+      console.log(item)
+      let cols= `<tr>
+            <th scope="row">${item.mes}</th>
+            <td>${item.dia}</td>
+            <td>${item.valorTarifa}</td>
+            <td>${item.quantidadeHoras}</td>
+            <td>${item.potenciaTotal}</td>
+            <td>${item.custoTotal}</td>
+        </tr>`
+      $("#table_relatorio>tbody").append(cols)
+    }
+    console.log(result.data);
   }).catch(err => {
     console.log(err);
   })
 }
 
-const consutRelatorio = function(){
-  API.get('lampadaApi', '/lampada/relatorio/mes', {}).then(result => {
-    console.log({result});
-  }).catch(err => {
-    console.log(err);
-  })
-}
+
 
 /*API.get('lampadaApi', `/lampada/${id}`, {}).then((result) => {
   this.lampada = JSON.parse(result.body);
@@ -131,5 +168,5 @@ Auth.currentCredentials().then((info) => {
 });
 
 export {
-  resendCode, confirmation, login, subscribe, publish,statusLampada,consutRelatorio,lamp1,lamp2, clock, grafico
+  resendCode, publish_temporizador,publish_lampada_status, confirmation, login, subscribe, publish_tarifa, consutRelatorio, lamp1, lamp2, clock, grafico, menu
 }

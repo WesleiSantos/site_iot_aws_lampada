@@ -7,14 +7,12 @@
     }
 
     .form {
-        position: relative;
+        position: absolute;
         z-index: 1;
-        background: #FFFFFF;
-        max-width: 360px;
-        margin: 0 auto 100px;
-        padding: 45px;
+        left: 10%;
+        top: 6%;
+        width: 80%;
         text-align: center;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     }
 
     .form input {
@@ -67,7 +65,7 @@
 
     .container {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         max-width: 300px;
         margin: 0 auto;
     }
@@ -114,11 +112,11 @@
 
     .top-box{
         position: absolute;
-        width: 1760px;
-        height: 300px;
+        width: 92%;
+        height: 30%;
         right: 4%;
         left: 4%;
-        top: 48px;
+        top: 5%;
 
 
         background: rgba(250, 250, 250, 0.15);
@@ -126,12 +124,8 @@
     }
 
     .title-box{
-        position: absolute;
-        width: 587px;
-        height: 100px;
-        left: 586px;
-        right: 586px;
-        top: 100px;
+        width: 0;
+        height: 20%;
 
         font-family: Roboto;
         font-style: normal;
@@ -146,17 +140,13 @@
     }
 
     .text-box{
-        position: absolute;
-        width: 587px;
+        width: 40%;
         height: 100px;
-        left: 5%;
-        top: 10px;
 
         font-family: Roboto;
         font-style: normal;
         font-weight: normal;
-        font-size: 48px;
-        line-height: 56px;
+        font-size: 300%;
         display: flex;
         align-items: center;
         text-align: center;
@@ -164,25 +154,33 @@
         color: #000000;
     }
 
-    .img-box1{ 
+    #status_lampada{
         position: absolute;
-        left: 20%;
-        top: 12%;
+        width: 8%;
+        height: 15%;
+        right: 30%;
+        top:18%;
+    }
+
+    .img-box1{ 
+        padding-left: 50%;
     }
 
     .img-box2{ 
         position: absolute;
-        left: 41%;
-        top: 5%;
+        width: 50%;
+        height: 50%;
+        right: 12%;
+        top:18%; 
     }
 
     .main-box{
         position: absolute;
-        width: 1760px;
-        height: 864px;
+        width: 93%;
+        height: 90%;
         right: 4%;
         left: 4%;
-        top: 426px;
+        top: 40%;
         border-radius: 0px;
         background: #FFFBFB;
         border: 1px solid #000000;
@@ -191,10 +189,10 @@
 
     .div-box1{
         position: absolute;
-        width: 731px;
-        height: 337px;
+        width: 40%;
+        height: 35%;
         left: 5%;
-        top: 500;
+        top: 63%;
         
         background: #FFFFFF;
         border: 1px solid #000000;
@@ -204,10 +202,10 @@
 
     .div-box2{
         position: absolute;
-        width: 731px;
-        height: 337px;
+        width: 40%;
+        height: 35%;
         right: 5%;
-        top: 500;
+        top: 63%;
 
         background: #FFFFFF;
         border: 1px solid #000000;
@@ -215,51 +213,36 @@
         border-radius: 50px;
     }
 
-    .button-off{
-        position: absolute;
-        width: 309px;
-        height: 73px;
-        left: 591px;
-        top: 788px;
-    }
-
-    .button-div{
-        width: 309px;
-        height: 73px;
-        left: 591px;
-        top: 60%;
-    }
-
     .line{
         position: absolute;
-        width: 728px;
+        width: 100%;
         height: 0px;
-        top: 15%;
+        top: 20%;
 
         border: 1px solid #000000;
         transform: rotate(0.16deg);
     }
 
     .box-title{
-        width: 500px;
-        height: 37px;
+        width: 70%;
+        height: 10%;
         text-align: center;
 
         font-family: Roboto;
         font-style: normal;
         font-weight: normal;
-        font-size: 36px;
+        font-size: 180%;
         line-height: 42px;
+        white-space: nowrap;
 
         color: #000000;
     }
-
     .btn-on{
         position: absolute;
-        width: 269.13px;
-        height: 73px;
-        right: 34%;
-        top: 400px;
+        width: 15%;
+        height: 7%;
+        right: 32%;
+        top: 45%; 
         background: #008000;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 34px;
@@ -268,10 +251,10 @@
 
     .btn-off{
         position: absolute;
-        width: 269.13px;
-        height: 73px;
-        left: 34%;
-        top: 400px;    
+        width: 15%;
+        height: 7%;
+        left: 32%;
+        top: 45%;    
         background: #E63232;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 34px;
@@ -279,33 +262,112 @@
     }
 
     .logo{
-        position:inherit;
-        width: 50px;
-        height: 45px;
-        left: 85%;
-        top: 3;
+        position:absolute;
+        width: 20%;
+        height: 20%;
+        left: 75%;
+        top: 1%;
+    }
+    .box-tarifa{
+        margin-top:20%;
     }
 
-    .btn-status{
-        position: absolute;
-        width: 269.13px;
-        height: 73px;
-        left: 34%;
-        top: 400px;    
-        background: #E63232;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 34px;
-        font-size: 30px;
+    .input-box{
+        width: 100%;
+        height: 100%;
+        font-size: 200%;
     }
 
-    .btn-timer{
-        position: absolute;
-        width: 269.13px;
-        height: 73px;
-        left: 34%;
-        top: 400px;    
-        background: #E63232;
+    .submit-btn{
+        width: 10%;
+        height: 7%;  
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 34px;
-        font-size: 30px;
+        border-radius: 4%;
+        font-size: 90%;
+    }
+
+    .start-time{
+        position: absolute;
+        top: 30%;
+        left: 30%;
+        width: 30%;
+        height: 10%;
+    }
+
+    .time-on{
+        position: absolute;
+        top: 30%;
+        right: 5%;
+        width: 30%;
+        height: 10%;
+    }
+
+    .day-select{
+        position: absolute;
+        top: 30%;
+        left: 5%;
+        width: 20%;
+        height: 10%;
+    }
+    
+    .box-btn{
+        position: absolute;
+        width: 30%;
+        height: 20%;
+        left: 65%;
+        top: 70%;    
+        background: #CCCCCC;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 4%;
+        font-size: 70%;
+    }
+
+    .month-box{
+        position: absolute;
+        width: 20%;
+        height: 10%;
+        left: 43%;
+        top: 71%;    
+        font-size: 80%;
+    }
+
+    .selection-box{
+        width: 100%;
+        height: 100%;
+        font-size: 100%;
+    }
+
+    .check{
+        display: none;
+    }
+
+    .icon{
+
+        position: absolute;
+        cursor: pointer;
+        padding: 0%;
+        z-index: 2;
+    }
+
+    .bar{
+        position: absolute;
+        background-color: #333;
+        height: 130%;
+        width: 20%;
+        transition: all .2s linear;
+        z-index: 1;
+        top: 0%;
+        left: -20%;
+    }
+
+    .check:checked ~ .bar{
+        transform:translateX(100%);
+    }
+
+    .table-overflow {
+        position: absolute;
+        top:22%;
+        width: 100%;
+        max-height:100px;
+        overflow-y:auto;
     }

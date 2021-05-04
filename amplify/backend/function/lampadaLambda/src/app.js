@@ -1,10 +1,10 @@
 /* Amplify Params - DO NOT EDIT
-	ENV
-	REGION
-	STORAGE_DYNAMOB9A364D2_ARN
-	STORAGE_DYNAMOB9A364D2_NAME
-	STORAGE_DYNAMORELATORIO_ARN
-	STORAGE_DYNAMORELATORIO_NAME
+  ENV
+  REGION
+  STORAGE_DYNAMOB9A364D2_ARN
+  STORAGE_DYNAMOB9A364D2_NAME
+  STORAGE_DYNAMORELATORIO_ARN
+  STORAGE_DYNAMORELATORIO_NAME
 Amplify Params - DO NOT EDIT *//*
 Copyright 2017 - 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
@@ -59,21 +59,51 @@ app.get('/lampada/*', function(req, res) {
   // Add your code here
   res.json({success: 'get call succeed!', url: req.url});
 });*/
-app.get('/lampada', function(req, res) {
+app.get('/lampada', function (req, res) {
   var params = {
     TableName: tablelampada // TODO: UPDATE THIS WITH THE ACTUAL NAME OF THE FORM TABLE ENV VAR (set by Amplify CLI)
   }
-  docClient.scan(params, function(err, data) {
+  docClient.scan(params, function (err, data) {
     if (err) res.json({ err })
     else res.json({ data })
   })
 });
 
-app.get('/lampada/relatorio/mes', function(req, res) {
+/*app.get("/lampada/relatorio/mes/:id", function (request, response) {  
+  let params = {  
+    TableName: tableRelatorio,  
+    Key: {  
+      id: request.params.id  
+    }  
+  }  
+  docClient.get(params, (error, result) => {  
+    if (error) {  
+      response.json({ statusCode: 500, error: error.message });  
+    } else {  
+      response.json({ statusCode: 200, url: request.url, body: JSON.stringify(result.Item)})  
+    }  
+  });  
+});*/
+app.get("/lampada/relatorio/mes/:id", function (req, res) {
+  var params = {
+     KeyConditionExpression: "mes =:mes",
+     ExpressionAttributeValues: {
+      ":mes": Number(req.params.id)
+     },
+    TableName: tableRelatorio
+  }
+  docClient.query(params, function (err, data) {
+    if (err) res.json({ err })
+    else res.json({"status": 1, "data": data.Items })
+  })
+});
+
+
+app.get('/lampada/relatorio/mes', function (req, res) {
   var params = {
     TableName: tableRelatorio // TODO: UPDATE THIS WITH THE ACTUAL NAME OF THE FORM TABLE ENV VAR (set by Amplify CLI)
   }
-  docClient.scan(params, function(err, data) {
+  docClient.scan(params, function (err, data) {
     if (err) res.json({ err })
     else res.json({ data })
   })
@@ -102,46 +132,46 @@ app.get("/lampada/:id", function (request, response) {
 * Example post method *
 ****************************/
 
-app.post('/lampada', function(req, res) {
+app.post('/lampada', function (req, res) {
   // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  res.json({ success: 'post call succeed!', url: req.url, body: req.body })
 });
 
-app.post('/lampada/*', function(req, res) {
+app.post('/lampada/*', function (req, res) {
   // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  res.json({ success: 'post call succeed!', url: req.url, body: req.body })
 });
 
 /****************************
 * Example put method *
 ****************************/
 
-app.put('/lampada', function(req, res) {
+app.put('/lampada', function (req, res) {
   // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
+  res.json({ success: 'put call succeed!', url: req.url, body: req.body })
 });
 
-app.put('/lampada/*', function(req, res) {
+app.put('/lampada/*', function (req, res) {
   // Add your code here
-  res.json({success: 'put call succeed!', url: req.url, body: req.body})
+  res.json({ success: 'put call succeed!', url: req.url, body: req.body })
 });
 
 /****************************
 * Example delete method *
 ****************************/
 
-app.delete('/lampada', function(req, res) {
+app.delete('/lampada', function (req, res) {
   // Add your code here
-  res.json({success: 'delete call succeed!', url: req.url});
+  res.json({ success: 'delete call succeed!', url: req.url });
 });
 
-app.delete('/lampada/*', function(req, res) {
+app.delete('/lampada/*', function (req, res) {
   // Add your code here
-  res.json({success: 'delete call succeed!', url: req.url});
+  res.json({ success: 'delete call succeed!', url: req.url });
 });
 
-app.listen(3000, function() {
-    console.log("App started")
+app.listen(3000, function () {
+  console.log("App started")
 });
 
 // Export the app object. When executing the application local this does nothing. However,
