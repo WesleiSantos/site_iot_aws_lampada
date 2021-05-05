@@ -61,18 +61,22 @@ Amplify.addPluggable(new AWSIoTProvider({
   aws_pubsub_endpoint: 'wss://a1u5p9d1s2ikgy-ats.iot.us-east-1.amazonaws.com/mqtt',
 }));
 
-const subscribe = function () {
-  PubSub.subscribe('myTopic', { provider: 'AWSIoTProvider' }).subscribe({
-    next: data => console.log('Message received', data),
-    error: error => console.error(error),
+
+  PubSub.subscribe("cmd/esp8266/house/lampada/res", { provider: 'AWSIoTProvider' }).subscribe({
+    next: data => {
+      console.log('Message received', data)
+      $("#success-alert-receive").removeClass("d-none").html(`Mensagem Recebida pelo dispositivo!`).fadeTo(3000, 1000).slideUp(1000, function () {
+        $("#success-alert-receive").slideUp(1000);
+      })
+      },
+    error: error => console.error(error) ,
     close: () => console.log('Done'),
   })
-}
+
 
 const publish_lampada_status = function (comando) {
   console.log(comando)
   PubSub.publish('cmd/esp8266/house/lampada/atualizar_status', { "status": comando })
-  //PubSub.publish('cmd/esp8266/house/lampada/req', { "status": comando })
 }
 
 const publish_tarifa = function (valor_tarifa) {
@@ -132,7 +136,7 @@ setInterval(function () {
   let mesCorreto = (hora+2)/2
   let diaCorreto = (hora + 2) % 2 == 0 ? Math.ceil((tempoSegundos / 240)) : Math.ceil((tempoSegundos / 240)) + 15
   let horarioCorreto = (tempoSegundos/10)%24
-  $("#calendar").html(`${Math.trunc(horarioCorreto)}:00h ${diaCorreto}/${mesCorreto}`)
+  $("#calendar").html(`${Math.trunc(horarioCorreto)}:00h ${diaCorreto}/${Math.trunc(mesCorreto)}`)
 }, 9000)
 
 
@@ -166,54 +170,6 @@ const consutRelatorio = function (mes) {
   })
 }
 
-
-
-/*API.get('lampadaApi', `/lampada/${id}`, {}).then((result) => {
-  this.lampada = JSON.parse(result.body);
-}).catch(err => {
-  console.log(err);
-})*/
-
-/*Auth.signUp({
-  username,
-  password,
-  attributes: {
-    email,          // optional
-},
-validationData: []  //optional
-  })
-  .then(data => console.log(data))
-  .catch(err => console.log(err));
-
-// After retrieveing the confirmation code from the user
-Auth.confirmSignUp(username, code, {
-  // Optional. Force user confirmation irrespective of existing alias. By default set to True.
-  forceAliasCreation: true    
-}).then(data => console.log(data))
-.catch(err => console.log(err));
-
-Auth.resendSignUp(username).then(() => {
-  console.log('code resent successfully');
-}).catch(e => {
-  console.log(e);
-});
-
-Auth.signOut()
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-
-// By doing this, you are revoking all the auth tokens(id token, access token and refresh token)
-// which means the user is signed out from all the devices
-// Note: although the tokens are revoked, the AWS credentials will remain valid until they expire (which by default is 1 hour)
-Auth.signOut({ global: true })
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-
-Auth.currentCredentials().then((info) => {
-  const cognitoIdentityId = info.data.IdentityId;
-  console.log(cognitoIdentityId);
-});
-*/
 Auth.currentCredentials().then((info) => {
   const cognitoIdentityId = info;
   console.log("usuário", cognitoIdentityId);
@@ -225,5 +181,5 @@ Auth.currentCredentials().then((info) => {
 });
 
 export {
-  resendCode, publish_temporizador, publish_lampada_status, confirmation, login, subscribe, publish_tarifa, consutRelatorio, lamp1, lamp2, clock, grafico, menu
+  resendCode, publish_temporizador, publish_lampada_status, confirmation, login, publish_tarifa, consutRelatorio, lamp1, lamp2, clock, grafico, menu
 }
