@@ -154,12 +154,24 @@
         color: #000000;
     }
 
-    #status_lampada{
+    .status_lampada{
         position: absolute;
-        width: 8%;
-        height: 15%;
+        width: 10%;
+        height: 10%;
         right: 30%;
         top:18%;
+    }
+    #status_lampada{
+        width: 25px;
+        height: 25px;
+        border: 1px solid #000000;
+        border-radius: 50%;
+    }
+    .status_ligado{
+        background: #f0f332;
+    }
+    .status_desligado{
+        background: #747474;
     }
 
     .img-box1{ 
@@ -189,11 +201,10 @@
 
     .div-box1{
         position: absolute;
-        width: 40%;
-        height: 35%;
-        left: 5%;
-        top: 63%;
-        
+        width: 45%;
+        height: 40%;
+        left: 2%;
+        top: 59%;
         background: #FFFFFF;
         border: 1px solid #000000;
         box-sizing: border-box;
@@ -202,11 +213,10 @@
 
     .div-box2{
         position: absolute;
-        width: 40%;
-        height: 35%;
-        right: 5%;
-        top: 63%;
-
+        width: 45%;
+        height: 40%;
+        right: 2%;
+        top: 59%;
         background: #FFFFFF;
         border: 1px solid #000000;
         box-sizing: border-box;
@@ -327,7 +337,7 @@
         width: 20%;
         height: 10%;
         left: 43%;
-        top: 71%;    
+        top: 72%;    
         font-size: 80%;
     }
 
@@ -370,4 +380,18 @@
         width: 100%;
         max-height:100px;
         overflow-y:auto;
+    }
+
+    .labels_relatorio{
+        position: absolute;
+        top: 70%;
+        width: 38%;
+        left: 3%;
+    }
+
+    .inf_user{
+        position: absolute;
+        top: 10%;
+        width: 38%;
+        left: 10%;
     }

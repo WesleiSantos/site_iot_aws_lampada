@@ -17,11 +17,14 @@
 
     <input type="checkbox" id="check" class="check">
     <label class="icon" id="icon" for="check"></label>
-
     <div class="bar">
         <nav>
             <div class="login-page">
                 <div class="form">
+                    <div class="alert alert-success" id="success-alert">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        Success!
+                     </div>
                     <form class="login-form">
                         <input type="text" id="userName" placeholder="username" />
                         <input type="password" id="password" placeholder="password" />
@@ -33,10 +36,19 @@
     </div>
 
     <div class="top-box d-flex justify-content-center">
-        <div class="d-flex align-items-center pl-5 img-box1"><h1 class="text-center ml-5 pl-5">Automação <br/> Residencial</h1> </div></div>
+        <div class="d-flex align-items-center pl-5 img-box1">
+            <h1 class="text-center ml-5 pl-5">Automação <br /> Residencial</h1>
+        </div>
+    </div>
+    <div class="inf_user font-weight-bold d-flex flex-column">
+        <label id="user_label">Authenticated:  </label>
+        <label id="calendar">00:00h 00/00</label>
+    </div>
     </div>
     <div class="main-box">
-        <div class="text-box ml-3 mb-3"><h3>Dispositivo: Lâmpada</h3></div>
+        <div class="text-box ml-3 mb-3">
+            <h3>Dispositivo: Lâmpada</h3>
+        </div>
         <form class="form-inline mt-3">
             <div class="form-group ml-3 mb-2 mr-2">
                 <input class="form-control" type="text" id="tarifa">
@@ -44,10 +56,13 @@
             <button type="submit" id="submit_tarifa" class="btn btn-secondary mb-2">Enviar tarifa</button>
         </form>
         <div class="img-box2"></div>
-        <label id="status_lampada"></label>
+        <div class="status_lampada d-flex flex-column">
+            <div id="status_lampada" class="status_desligado ml-2" ></div>
+            <label for="status_lampada text-center">status</label>
+        </div>
         <div class="button-div">
-            <button id="off" class="btn-off btn btn-success">Off</button>
-            <button id="on" class="btn-on btn btn-danger">On</button>
+            <button id="on" class="btn-off btn btn-success">On</button>
+            <button id="off" class="btn-on btn btn-danger">Off</button>
         </div>
 
         <div class="div-box1">
@@ -147,7 +162,7 @@
                     <option value="24">24:00</option>
                 </select>
             </div>
-            <button type="submit" class="box-btn btn btn-secondary" id="program_time">Ativar</button>
+            <button type="submit" value="0" class="box-btn btn btn-secondary" id="program_time">Ativar</button>
         </div>
         <div class="div-box2">
             <div class="box-title">Histórico de consumo</div>
@@ -170,28 +185,33 @@
             </div>
             <div class="logo"></div>
             <button type="submit" class="box-btn btn btn-secondary" id="historico_submit">Buscar</button>
+            <div class="labels_relatorio font-weight-bold d-flex flex-column">
+                <label id="total_potencia">Total potência: 0.00 Wh</label>
+                <label id="total_custo">Total custo: 0.00 R$</label>
+            </div>
             <div class="line"></div>
             <div class="relatorio table-overflow">
                 <table class="table table-hover" id="table_relatorio">
                     <thead>
-                      <tr>
-                        <th scope="col">Mês</th>
-                        <th scope="col">Dia</th>
-                        <th scope="col">Valor Tarifa</th>
-                        <th scope="col">Tempo Total</th>
-                        <th scope="col">Potência Total</th>
-                        <th scope="col">Custo Total</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">Mês</th>
+                            <th scope="col">Dia</th>
+                            <th scope="col">Valor Tarifa</th>
+                            <th scope="col">Tempo Total</th>
+                            <th scope="col">Potência Total</th>
+                            <th scope="col">Custo Total</th>
+                        </tr>
                     </thead>
                     <tbody>
                     </tbody>
-                  </table>
+                </table>
             </div>
         </div>
     </div>
 </body>
 <script>
-    $(".img-box1").css({"background-image": `url(${libary.lamp1})`,"background-position":"10% 60%","background-size":"100% 70%","background-repeat":"no-repeat"})
+    $("#success-alert").hide();
+    $(".img-box1").css({ "background-image": `url(${libary.lamp1})`, "background-position": "10% 60%", "background-size": "100% 70%", "background-repeat": "no-repeat" })
     $(".img-box2").append(`<img src=${libary.lamp2} alt="Lamp2" alt="Lamp2" width="50%" height="60%">`)
     $(".div-box1 .logo").append(`<img src=${libary.clock} alt="Clock" width="70%" height="80%">`)
     $(".div-box2 .logo").append(`<img src=${libary.grafico} alt="Grafico" width="70%" height="80%">`)
@@ -199,7 +219,7 @@
     $('#off').click(e => {
         e.preventDefault()
         console.log("of")
-        libary.publish_lampada_status("1");
+        libary.publish_lampada_status("0");
     });
     $('#subscribe').click(e => {
         e.preventDefault()
@@ -209,7 +229,7 @@
     $('#on').click(e => {
         e.preventDefault()
         console.log("on")
-        libary.publish_lampada_status("0")
+        libary.publish_lampada_status("1")
     });
     $('#login').click(e => {
         e.preventDefault()
@@ -228,7 +248,16 @@
         let dia = $("#dia_inicio").val()
         let hora_inicio = $("#hora_inicio").val()
         let quantidade_tempo = $("#quantidade_tempo").val()
-        libary.publish_temporizador(dia, hora_inicio, quantidade_tempo)
+        let status_temp = $("#program_time").val()
+        if(status_temp==1){
+            dia=0
+            hora_inicio=0
+            quantidade_tempo=0
+            status_temp=0
+        }else{
+            status_temp=1
+        }
+        libary.publish_temporizador(status_temp, dia, hora_inicio, quantidade_tempo)
     })
     $('#submit_tarifa').click(e => {
         e.preventDefault()
